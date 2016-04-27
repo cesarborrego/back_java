@@ -1,0 +1,5 @@
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/TitulosResponse.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/Titulos.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/App.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/TitulosRepository.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/web/api/TitulosController.java
