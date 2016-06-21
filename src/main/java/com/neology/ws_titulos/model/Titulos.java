@@ -8,13 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tblTitulos")
-@NamedQuery(name="Titulos.findAll", query="SELECT t FROM Titulos t")
+@Table(name = "tblTitulos")
+@NamedQuery(name = "Titulos.findAll", query = "SELECT t FROM Titulos t")
 public class Titulos implements Serializable {
 
 	/**
@@ -22,54 +24,65 @@ public class Titulos implements Serializable {
 	 */
 	private static final long serialVersionUID = 6082155752048189675L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(unique = true, nullable = false)
 	private Integer intNumeroIdentificacion;
-	
-	@Column(nullable=false)
+
+	// bi-directional many-to-one association to Role
+	@ManyToOne
+	@JoinColumn(name = "intNumeroIdentificacionCert", nullable = false)
+	private Certificados certificados;
+
+	@Column(nullable = false)
 	private String strNombre;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String strApePaterno;
-	
-	@Column(nullable=true)
+
+	@Column(nullable = true)
 	private String strApeMaterno;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String strTitulo;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String strCarrera;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String strNivel;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private Integer intNumFolioDocumento;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String strNacionalidad;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
+	private String genero;
+
+	@Column(nullable = false)
 	private Date dFechaNac;
-	
-	@Lob
-	@Column(nullable=false)
-	private byte[] bFirmaTitulado;
-	
-	@Lob
-	@Column(nullable=false)
-	private byte[] bFotoOriginal;
-	
-	@Lob
-	@Column(nullable=false)
-	private byte[] bFotoMiniatura;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
+	private Date dFechaExpedicion;
+
+	@Column(nullable = false)
 	private String strNombreUniversidad;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private Integer intClaveUniversidad;
+
+	@Lob
+	@Column(nullable = false)
+	private byte[] bFirmaTitulado;
+
+	@Lob
+	@Column(nullable = false)
+	private byte[] bFotoOriginal;
+
+	@Lob
+	@Column(nullable = false)
+	private byte[] bFotoMiniatura;
 
 	public Integer getIntNumeroIdentificacion() {
 		return intNumeroIdentificacion;
@@ -189,6 +202,30 @@ public class Titulos implements Serializable {
 
 	public void setIntClaveUniversidad(Integer intClaveUniversidad) {
 		this.intClaveUniversidad = intClaveUniversidad;
-	}	
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public Date getdFechaExpedicion() {
+		return dFechaExpedicion;
+	}
+
+	public void setdFechaExpedicion(Date dFechaExpedicion) {
+		this.dFechaExpedicion = dFechaExpedicion;
+	}
+
+	public Certificados getCertificados() {
+		return certificados;
+	}
+
+	public void setCertificados(Certificados certificados) {
+		this.certificados = certificados;
+	}
 
 }

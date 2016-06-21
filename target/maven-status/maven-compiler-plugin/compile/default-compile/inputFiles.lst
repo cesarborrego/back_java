@@ -1,5 +1,13 @@
-/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/TitulosResponse.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/Certificados.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/CertificadosRepository.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/BaseResponse.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/utils/DateUtil.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/Identificaciones.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/Titulos.java
-/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/App.java
-/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/TitulosRepository.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/TitulosResponse.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/IdentificacionesResponse.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/web/api/TitulosController.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/TitulosRepository.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/dtos/TitulosDto.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/IdentificacionesRepository.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/App.java

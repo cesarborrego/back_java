@@ -13,7 +13,28 @@ public class TitulosResponse implements Serializable
 	private String msj;
 	private int code;
 	private Titulos titulos;
+//	private String fotoOriginal;
+//	private String fotoMiniatura;
+//	private String firmaDigital;
 	
+//	public String getFotoOriginal() {
+//		return fotoOriginal;
+//	}
+//	public void setFotoOriginal(String fotoOriginal) {
+//		this.fotoOriginal = fotoOriginal;
+//	}
+//	public String getFotoMiniatura() {
+//		return fotoMiniatura;
+//	}
+//	public void setFotoMiniatura(String fotoMiniatura) {
+//		this.fotoMiniatura = fotoMiniatura;
+//	}
+//	public String getFirmaDigital() {
+//		return firmaDigital;
+//	}
+//	public void setFirmaDigital(String firmaDigital) {
+//		this.firmaDigital = firmaDigital;
+//	}
 	public String getMsj() {
 		return msj;
 	}
