@@ -1,6 +1,7 @@
 package com.neology.ws_titulos.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,6 +49,15 @@ public class Certificados implements Serializable{
 	
 	@Column(nullable = false)
 	private double dPromedio;
+	
+	@Column(nullable = false)
+	private String carrera;
+	
+	@Column(nullable = false)
+	private String plantel;
+	
+	@Column(nullable = false)
+	private Date fechaIngreso;
 
 	public Integer getIntNumeroIdentificacionCert() {
 		return intNumeroIdentificacionCert;
@@ -119,6 +129,30 @@ public class Certificados implements Serializable{
 
 	public void setdPromedio(double dPromedio) {
 		this.dPromedio = dPromedio;
+	}
+
+	public String getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
+	}
+
+	public String getPlantel() {
+		return plantel;
+	}
+
+	public void setPlantel(String plantel) {
+		this.plantel = plantel;
+	}
+
+	public Date getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Date fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 
 }

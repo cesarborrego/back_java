@@ -45,6 +45,9 @@ public class Identificaciones implements Serializable{
 	
 	@Column(nullable = false)
 	private byte [] fotografia;
+	
+	@Column(nullable = false)
+	private String icn;
 
 	public Integer getID() {
 		return ID;
@@ -109,6 +112,13 @@ public class Identificaciones implements Serializable{
 	public void setFotografia(byte[] fotografia) {
 		this.fotografia = fotografia;
 	}
-	
+
+	public String getIcn() {
+		return icn;
+	}
+
+	public void String(String icn) {
+		this.icn = icn;
+	}	
 	
 }

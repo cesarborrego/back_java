@@ -6,4 +6,5 @@ import com.neology.ws_titulos.model.Titulos;
 
 public interface TitulosRepository extends CrudRepository<Titulos, Integer> {
 	Titulos findByIntNumeroIdentificacion(int intNumeroIdentificacion);
+	Titulos findByIcn(String icn);
 }

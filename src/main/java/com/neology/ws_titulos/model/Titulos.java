@@ -83,6 +83,9 @@ public class Titulos implements Serializable {
 	@Lob
 	@Column(nullable = false)
 	private byte[] bFotoMiniatura;
+	
+	@Column(nullable = false)
+	private String icn;
 
 	public Integer getIntNumeroIdentificacion() {
 		return intNumeroIdentificacion;
@@ -226,6 +229,14 @@ public class Titulos implements Serializable {
 
 	public void setCertificados(Certificados certificados) {
 		this.certificados = certificados;
+	}
+
+	public String getIcn() {
+		return icn;
+	}
+
+	public void setIcn(String icn) {
+		this.icn = icn;
 	}
 
 }

@@ -12,13 +12,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neology.ws_titulos.dtos.AutosSoatDTO;
 import com.neology.ws_titulos.dtos.TitulosDto;
+import com.neology.ws_titulos.model.AutosSoat;
+import com.neology.ws_titulos.model.CedulasNeology;
+import com.neology.ws_titulos.model.Engomados;
 import com.neology.ws_titulos.model.Identificaciones;
+import com.neology.ws_titulos.model.Licencias_Peru;
 import com.neology.ws_titulos.model.Titulos;
+import com.neology.ws_titulos.repository.AutosSoatRepository;
+import com.neology.ws_titulos.repository.CedulasNeoRepository;
+import com.neology.ws_titulos.repository.EngomadosRepository;
 import com.neology.ws_titulos.repository.IdentificacionesRepository;
+import com.neology.ws_titulos.repository.LicenciasPeruRepository;
 import com.neology.ws_titulos.repository.TitulosRepository;
+import com.neology.ws_titulos.response.AutosSoatResponse;
 import com.neology.ws_titulos.response.BaseResponse;
+import com.neology.ws_titulos.response.CedulasNeoResponse;
+import com.neology.ws_titulos.response.EngomadoResponse;
 import com.neology.ws_titulos.response.IdentificacionesResponse;
+import com.neology.ws_titulos.response.LicenciasPeruResponse;
 import com.neology.ws_titulos.response.TitulosResponse;
 
 @RestController
@@ -31,6 +44,18 @@ public class TitulosController {
 	@Autowired
 	IdentificacionesRepository identificacionesRepository;
 	
+	@Autowired
+	EngomadosRepository engomadosRepository;
+	
+	@Autowired
+	LicenciasPeruRepository licenciasPeruRepository;
+	
+	@Autowired
+	AutosSoatRepository autosSoatRepository;
+	
+	@Autowired
+	CedulasNeoRepository cedulasNeoRepository;
+	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(
@@ -41,6 +66,27 @@ public class TitulosController {
 			@RequestParam(value = "intNumeroIdentificacion") int intNumeroIdentificacion) {
 		Titulos titulos = new Titulos();
 		titulos =  titulosRepository.findByIntNumeroIdentificacion(intNumeroIdentificacion);
+		TitulosResponse c = new TitulosResponse();
+		if (titulos!=null) {			
+			c.setTitulos(titulos);
+			c.setMsj("Titulado Encontrado");
+			c.setCode(200);
+		} else {
+			c.setMsj("Titulado No Encontrado");
+			c.setCode(400);
+			c.setTitulos(titulos);
+		}
+		return c;
+	}	
+	
+	@RequestMapping(
+			value="/titulo", 
+			params = { "icn" }, 
+			method = RequestMethod.GET)
+	public TitulosResponse getDataTituloIcn(
+			@RequestParam(value = "icn") String icn) {
+		Titulos titulos = new Titulos();
+		titulos =  titulosRepository.findByIcn(icn);
 		TitulosResponse c = new TitulosResponse();
 		if (titulos!=null) {			
 			c.setTitulos(titulos);
@@ -77,6 +123,7 @@ public class TitulosController {
 			titulos.setIntClaveUniversidad(titulosDto.getIntClaveUniversidad());
 			titulos.setdFechaExpedicion(new Date(titulosDto.getdFechaExpedicion()));
 			titulos.setGenero(titulosDto.getGenero());
+			titulos.setIcn(titulosDto.getIcn());
 			baseResponse.setCode(200);
 			baseResponse.setMsj("Datos insertados en DB correctamente");
 			titulosRepository.save(titulos);
@@ -107,6 +154,102 @@ public class TitulosController {
 		}
 		return c;
 	}	
+	
+	@RequestMapping(
+			value="/engomado", 
+			params = { "placa" }, 
+			method = RequestMethod.GET)
+	public EngomadoResponse getDataEngomado(
+			@RequestParam(value = "placa") String placa) {
+		Engomados engomados = new Engomados();
+		engomados = engomadosRepository.findByPlaca(placa);
+		EngomadoResponse c = new EngomadoResponse();
+		if (engomados!=null) {			
+			c.setEngomados(engomados);
+			c.setMsg("Placa Encontrada");
+			c.setCode(200);
+		} else {
+			c.setMsg("Placa No Encontrada");
+			c.setCode(400);
+			c.setEngomados(engomados);
+		}
+		return c;
+	}
+	
+	@RequestMapping(
+			value="/licencia_peru", 
+			params = { "strNoLicencia" }, 
+			method = RequestMethod.GET)
+	public LicenciasPeruResponse getLicencia(
+			@RequestParam(value = "strNoLicencia") String strNoLicencia) {
+		Licencias_Peru licencias_Peru = new Licencias_Peru();
+		licencias_Peru =  licenciasPeruRepository.findByStrNoLicencia(strNoLicencia);
+		LicenciasPeruResponse c = new LicenciasPeruResponse();
+		if (licencias_Peru!=null) {			
+			c.setLicencias_Peru(licencias_Peru);
+			c.setMsg("Licencia Encontrada");
+			c.setCode(200);
+		} else {
+			c.setMsg("Licencia No Encontrada");
+			c.setCode(400);
+			c.setLicencias_Peru(licencias_Peru);
+		}
+		return c;
+	}	
+	
+	@RequestMapping(
+			value="/autos_soat",
+			params={"strFolio"},
+			method = RequestMethod.GET)
+	public AutosSoatResponse getAuto(@RequestParam(value = "strFolio") String strFolio) {
+		AutosSoat autosSoat = new AutosSoat();
+		autosSoat = autosSoatRepository.findByStrFolio(strFolio);
+		AutosSoatResponse autosSoatResponse = new AutosSoatResponse();
+		if( autosSoat!=null) {
+			autosSoatResponse.setMsg("Vehículo encontrado");
+			autosSoatResponse.setCode(200);
+			autosSoatResponse.setAutosSoat(autosSoat);
+		} else {
+			autosSoatResponse.setMsg("Vehículo No Encontrado");
+			autosSoatResponse.setCode(400);
+			autosSoatResponse.setAutosSoat(autosSoat);
+		}
+		return autosSoatResponse;
+	}
+	
+	@RequestMapping(value="/insertNewDateAutosSoat", 
+			method = RequestMethod.POST)
+	public BaseResponse insertNewDateAutoSoat(@RequestBody AutosSoatDTO autosSoatDTO) {
+		AutosSoat autosSoat =  autosSoatRepository.findByStrFolio(autosSoatDTO.getStrFolio());
+		BaseResponse baseResponse = new BaseResponse();
+		if(autosSoat!=null) {
+			autosSoat.setDtmFechaExpiracion(autosSoatDTO.getDtmFechaExpiracion());
+			baseResponse.setCode(200);
+			baseResponse.setMsj("Fecha "+autosSoatDTO.getDtmFechaExpiracion()+" actualizada en DB correctamente");
+			autosSoatRepository.save(autosSoat);
+		}		
+		return baseResponse;
+	}
+	
+	@RequestMapping(
+			value="/cedulaNeo",
+			params={"intNoCedula"},
+			method = RequestMethod.GET)
+	public CedulasNeoResponse getCedula(@RequestParam(value = "intNoCedula") String intNoCedula) {
+		CedulasNeology cedulasNeology = new CedulasNeology();
+		cedulasNeology = cedulasNeoRepository.findOne(Long.parseLong(intNoCedula));
+		CedulasNeoResponse cedulasNeoResponse = new CedulasNeoResponse();
+		if( cedulasNeology!=null) {
+			cedulasNeoResponse.setMsg("Cédula encontrada");
+			cedulasNeoResponse.setCode(200);
+			cedulasNeoResponse.setCedulasNeology(cedulasNeology);
+		} else {
+			cedulasNeoResponse.setMsg("Cédula No Encontrada");
+			cedulasNeoResponse.setCode(400);
+			cedulasNeoResponse.setCedulasNeology(cedulasNeology);
+		}
+		return cedulasNeoResponse;
+	}
 	
 	public static byte[] decodeImage(String imageDataString) {
         return Base64.decodeBase64(imageDataString);

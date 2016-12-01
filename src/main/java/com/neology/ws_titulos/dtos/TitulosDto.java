@@ -25,6 +25,7 @@ public class TitulosDto implements Serializable{
 	private int intClaveUniversidad;
 	private long dFechaExpedicion;
 	private String genero;
+	private String icn;
 	
 	public int getIntNumeroIdentificacion() {
 		return intNumeroIdentificacion;
@@ -128,4 +129,11 @@ public class TitulosDto implements Serializable{
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+	public String getIcn() {
+		return icn;
+	}
+	public void setIcn(String icn) {
+		this.icn = icn;
+	}
+	
 }
