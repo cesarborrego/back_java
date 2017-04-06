@@ -1,8 +1,9 @@
-/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/dtos/ParkiDTO.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/EngomadosRepository.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/ParquimetrosRepository.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/web/api/TitulosController.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/EngomadoResponse.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/Identificaciones.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/Parquimetros.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/MovimientosRepository.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/BaseResponse.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/CedulasNeology.java
@@ -18,9 +19,11 @@
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/App.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/IdentificacionesRepository.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/TitulosRepository.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/Parki_Tarjeta_Response.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/CedulasNeoResponse.java
-/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/TitulosResponse.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/dtos/ParkiMovimientosDTO.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/LicenciasPeruResponse.java
+/home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/response/TitulosResponse.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/utils/DateUtil.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/repository/CedulasNeoRepository.java
 /home/cesar/WS_spring_boot/ws_titulos/src/main/java/com/neology/ws_titulos/model/Certificados.java

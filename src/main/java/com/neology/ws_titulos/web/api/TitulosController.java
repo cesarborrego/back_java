@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neology.ws_titulos.dtos.AutosSoatDTO;
-import com.neology.ws_titulos.dtos.ParkiDTO;
+import com.neology.ws_titulos.dtos.ParkiMovimientosDTO;
 import com.neology.ws_titulos.dtos.TitulosDto;
 import com.neology.ws_titulos.model.AutosSoat;
 import com.neology.ws_titulos.model.CedulasNeology;
@@ -24,6 +24,7 @@ import com.neology.ws_titulos.model.Engomados;
 import com.neology.ws_titulos.model.Identificaciones;
 import com.neology.ws_titulos.model.Licencias_Peru;
 import com.neology.ws_titulos.model.MovimientosParki;
+import com.neology.ws_titulos.model.Parquimetros;
 import com.neology.ws_titulos.model.TipoMovimientos;
 import com.neology.ws_titulos.model.Titulos;
 import com.neology.ws_titulos.repository.AutosSoatRepository;
@@ -32,6 +33,7 @@ import com.neology.ws_titulos.repository.EngomadosRepository;
 import com.neology.ws_titulos.repository.IdentificacionesRepository;
 import com.neology.ws_titulos.repository.LicenciasPeruRepository;
 import com.neology.ws_titulos.repository.MovimientosRepository;
+import com.neology.ws_titulos.repository.ParquimetrosRepository;
 import com.neology.ws_titulos.repository.TitulosRepository;
 import com.neology.ws_titulos.response.AutosSoatResponse;
 import com.neology.ws_titulos.response.BaseResponse;
@@ -39,6 +41,7 @@ import com.neology.ws_titulos.response.CedulasNeoResponse;
 import com.neology.ws_titulos.response.EngomadoResponse;
 import com.neology.ws_titulos.response.IdentificacionesResponse;
 import com.neology.ws_titulos.response.LicenciasPeruResponse;
+import com.neology.ws_titulos.response.Parki_Tarjeta_Response;
 import com.neology.ws_titulos.response.TitulosResponse;
 
 @RestController
@@ -65,6 +68,9 @@ public class TitulosController {
 
 	@Autowired
 	CedulasNeoRepository cedulasNeoRepository;
+	
+	@Autowired
+	ParquimetrosRepository parquimetrosRepository;
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -259,10 +265,28 @@ public class TitulosController {
 
 	@RequestMapping(value="/insertMovementParquimetro", 
 			method = RequestMethod.POST)
-	public BaseResponse insertMovementParquimetro(@RequestBody ParkiDTO parkiDTO) {
+	public BaseResponse insertMovementParquimetro(@RequestBody ParkiMovimientosDTO parkiDTO) {
+		int iSaldoAnterior, iSaldoNuevo = 0;
 		BaseResponse baseResponse = new BaseResponse();
 		MovimientosParki movimientosParki = new MovimientosParki();
 		TipoMovimientos tipoMovimientos = new TipoMovimientos();
+		
+		Parquimetros parquimetros = new Parquimetros();
+		parquimetros = parquimetrosRepository.findByStrTarjetaID(parkiDTO.getStrTarjetaID());
+		iSaldoAnterior = parquimetros.getiSaldo();
+		switch (parkiDTO.getTipoMovimiento()) {
+		case 1:
+			iSaldoNuevo = iSaldoAnterior + parkiDTO.getiMonto();
+			break;
+		case 2:
+			iSaldoNuevo = iSaldoAnterior - parkiDTO.getiMonto();
+			break;
+		default:
+			break;
+		}
+		parquimetros.setiSaldo(iSaldoNuevo);
+		parquimetrosRepository.save(parquimetros);
+		
 		movimientosParki.setStrTarjetaID(parkiDTO.getStrTarjetaID());
 		movimientosParki.setdFechaMovimiento(new Date(parkiDTO.getdFechaMovimiento()));
 		movimientosParki.setiMonto(parkiDTO.getiMonto());		
@@ -270,6 +294,7 @@ public class TitulosController {
 		movimientosParki.setTipoMovimientos(tipoMovimientos);
 		baseResponse.setCode(200);
 		baseResponse.setMsj("Movimiento en Tarjeta "+parkiDTO.getStrTarjetaID()+" con monto $"+parkiDTO.getiMonto()+" registrado correctamente");
+		baseResponse.setObject(parquimetros);
 		movimientosRepository.save(movimientosParki);		
 		return baseResponse;
 	}
@@ -299,7 +324,24 @@ public class TitulosController {
 		}
 		return baseResponse;
 	}
-
+	
+	@RequestMapping(value = "/parquimetros", params = { "strTarjetaID" }, method = RequestMethod.GET)
+	public Parki_Tarjeta_Response getDataTarjetaParquimetro(
+			@RequestParam(value = "strTarjetaID") String strTarjetaID) {
+		Parquimetros parquimetros = new Parquimetros();
+		parquimetros = parquimetrosRepository.findByStrTarjetaID(strTarjetaID);
+		Parki_Tarjeta_Response parki_Tarjeta_Response = new Parki_Tarjeta_Response();
+		if (parquimetros != null) {
+			parki_Tarjeta_Response.setParquimetros(parquimetros);
+			parki_Tarjeta_Response.setMsg("Tarjeta encontrada");
+			parki_Tarjeta_Response.setCode(200);
+		} else {
+			parki_Tarjeta_Response.setMsg("Tarjeta No Encontrado");
+			parki_Tarjeta_Response.setCode(400);
+		}
+		return parki_Tarjeta_Response;
+	}
+	
 	public static byte[] decodeImage(String imageDataString) {
 		return Base64.decodeBase64(imageDataString);
 	}
